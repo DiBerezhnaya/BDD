@@ -1,5 +1,3 @@
-5 lines (11 sloc)  230 Bytes
-
 image: Ubuntu 
 
 stack: jdk 11  
