@@ -16,7 +16,6 @@ public class DashboardPage {
         SelenideElement reloadButton = $x("//button[@data-test-id='action-reload']");
         reloadButton.should(visible);
         SelenideElement error = $x("//div[@data-test-id='error-notification']");
-        error.shouldBe(visible);
     }
 
     public static MoneyTransfer clickFirstCardButton() {

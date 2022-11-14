@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
@@ -20,13 +21,13 @@ public class MoneyTransfer {
         button.click();
     }
 
-    public String Error() {
+    public void error() {
         error.should(text("Операция невозможна! На карте недостаточно средств."));
-        return String.valueOf(error);
+        error.shouldBe(visible);
     }
 
-    public String invalidCard() {
+    public void invalidCard() {
         errorButton.should(Condition.text("Ошибка! Произошла ошибка"));
-        return String.valueOf(errorButton);
+        errorButton.shouldBe(visible);
     }
 }

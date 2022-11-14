@@ -1,5 +1,6 @@
 package ru.netology.test;
 
+import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.netology.data.DataHelper;
@@ -17,6 +18,7 @@ public class MoneyTransferTest {
 
     @BeforeEach
     public void setUp() {
+        Configuration.holdBrowserOpen = true;
         open("http://localhost:9999/");
         var loginPage = new LoginPageV1();
         var authInfo = DataHelper.getAuthInfo();
@@ -60,18 +62,14 @@ public class MoneyTransferTest {
         int amount = 20_000;
         var moneyTransfer = clickFirstCardButton();
         moneyTransfer.transfer(String.valueOf(amount), String.valueOf(getSecondCardInfo()));
-        String expected = "Операция невозможна! На карте не достаточно средств.";
-
-        assertEquals(expected, moneyTransfer.Error());
+        moneyTransfer.error();
     }
 
     @Test
     public void moneyTransferFromSecondToSecondCard() {
-        int amount = 5_000;
+        int amount = 4_000;
         var moneyTransfer = clickSecondCardButton();
         moneyTransfer.transfer(String.valueOf(amount), String.valueOf(getSecondCardInfo()));
-        String expected = "Ошибка! Произошла ошибка";
-
-        assertEquals(expected,moneyTransfer.invalidCard());
+        moneyTransfer.invalidCard();
       }
 }
